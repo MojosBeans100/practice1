@@ -1,3 +1,6 @@
+
+/* INTRO SECTION SCREEN */
+
 #main-div {
     width: 800px;
     height: 500px;
@@ -5,3 +8,151 @@
     border: solid black 2px;
     margin-top: 50px;
 }
+
+.introSectionDiv {
+    border: solid red;
+}
+
+#welcome-header {
+    font-size: 40px;
+    text-align: center;
+}
+
+#hello-intro {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#name-entry { 
+    height: 40px;
+    width: 95%;
+    text-align: center;
+    font-size: 35px;
+    margin: auto;
+}
+
+#intro-form {
+    border: solid purple;
+    width: 50%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+#name-button {
+    margin: auto;
+    font-size: 40px;
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 50px;
+    background-color: palegoldenrod;
+}
+
+/* CHOOSE GAME OPTIONS SCREEN */
+
+.game-options-div {
+    border: solid orange;
+    height: 90%;
+    overflow: hidden;
+}
+
+#welcome-message {
+    text-align: center;
+    font-size: 40px;
+}
+
+#choose-game-options-text {
+    text-align: center;
+    font-size: 30px;
+}
+
+#difficulty-form, #game-length-form {
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 10%;
+    text-align: center;
+}
+
+.game-difficulty-radio-labels, .game-length-radio-labels {
+    margin-left: 20px;
+    margin-right: 40px;
+    font-size: 20px;
+}
+
+
+#play-game-button{
+    margin-top: 50px;
+    height: 50px;
+    width: 40%;
+    font-size: 25px;
+    margin-left: 30%;
+}
+
+#home-button {
+    height: 30px;
+    width: 20%;
+    margin-left: 40%;
+}
+
+#game-area-div-id {
+    border: solid red;
+    height: 100%;
+   
+}
+
+#question-h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+
+
+#game-area-top {
+    height: 20%;
+    width: 100%;
+    border: solid pink;
+}
+
+#game-area-left {
+    height: 80%;
+    width: 75%;   
+    float: left;
+    border: solid blue;
+}
+
+#game-area-right {
+    height: 80%;
+    width: 20%;   
+    float: right;
+    border: solid green;
+    display: flex;
+    flex-direction: column;
+    
+    text-align: center;  
+}
+
+.game-area-right-divs{
+    border: solid pink;
+    height: 25%;
+}
+
+.tally-labels {
+    padding: 0;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+
+.tally-numbers {
+    padding: 0;
+    margin: 0;
+    font-size: 30px;
+}
+
+#answer-multiple-choice {
+    display: flex;
+    position: relative;
+    padding-bottom: 30px;
+   
+}
+ 
