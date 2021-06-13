@@ -6,6 +6,9 @@ let easyEnglish = ["tidy", "kiss", "listen", "eat", "drink", "wave", "stir", "co
  * and test input for the name.  It starts when the browser has loaded, and 
  * resets to this if the Reset/Home/Start Again button is pressed in other screens
  */
+
+document.addEventListener("DOMContentLoaded", introSection);
+
 function introSection() {
 
     let mainDiv = document.getElementById("main-div");
@@ -31,15 +34,13 @@ function introSection() {
 
     let nameInput = document.createElement("input");
     nameInput.type = "text";
+    nameInput.required = true;   /// why does this not work
     nameInput.id = "name-entry";
     introForm.appendChild(nameInput);
 
     let firstSubmitButton = document.createElement("button");
     firstSubmitButton.type = "submit";
     firstSubmitButton.id = "name-button";
-
-
-
     firstSubmitButton.innerHTML = "Ok";
     introForm.appendChild(firstSubmitButton);
 
@@ -49,11 +50,7 @@ function introSection() {
     // firstSubmitButton.onclick = "chooseGameOptions()";
     firstSubmitButton.addEventListener("click", chooseGameOptions);
 
-    document.getElementById("hello").remove();
-
-
 }
-
 
 /**
  * This function changes the first intro screen into the game options screen,
@@ -66,7 +63,7 @@ function chooseGameOptions() {
     // Get the main div as the parent
     let mainDiv = document.getElementById("main-div");
     let userName = document.getElementById("name-entry").value;
-
+    
     // Create Game Options Screen div
     let gameOptionsDiv = document.createElement("div");
     gameOptionsDiv.classList = "game-options-div";
@@ -166,8 +163,6 @@ function chooseGameOptions() {
             gameDifficulty = "Hard";
         };
 
-        // console.log(gameDifficulty);
-
         if (gameLength10.checked) {
             gameLength = 10;
         } else if (gameLength20.checked) {
@@ -180,7 +175,6 @@ function chooseGameOptions() {
             gameLength = 50;
         };
 
-        // console.log(gameLength);
         homeButton.remove();
         openGameArea();
     });
@@ -203,7 +197,6 @@ function chooseGameOptions() {
 
 }
 
-
 /**
  * This function changes the first intro screen into the game area with question, 
  * multiple choice, answer tally etc.  It sets up the HTML.  It is called by the "Play"
@@ -211,16 +204,9 @@ function chooseGameOptions() {
  */
 function openGameArea() {
 
-    // Determine difficulty chosen to determine how many radio buttons needed
-    // if (gameDifficulty === "Easy") {
-    //     numberMcOptions = 4;
-    // } else if (gameDifficulty === "Medium") {
-    // numberMcOptions = 5;
-    // } else {
-    //     numberMcOptions = 6;
-    // }
-   
 
+    console.log(gameDifficulty);
+    console.log(gameLength);
     // Get main div
     let mainDiv = document.getElementById("main-div");
 
@@ -238,6 +224,15 @@ function openGameArea() {
     let gameAreaLeft = document.createElement("div");
     gameAreaLeft.id = "game-area-left";
     gameAreaDiv.appendChild(gameAreaLeft);
+
+    // Create column divs within left div
+    let gameAreaLeft1 = document.createElement("div");
+    gameAreaLeft1.id = "game-area-left1";
+    gameAreaLeft.appendChild(gameAreaLeft1);
+
+    let gameAreaLeft2 = document.createElement("div");
+    gameAreaLeft2.id = "game-area-left2";
+    gameAreaLeft.appendChild(gameAreaLeft2);
 
     // Create right div
     let gameAreaRight = document.createElement("div");
@@ -261,23 +256,21 @@ function openGameArea() {
     gameAreaRight4.classList.add("game-area-right-divs");
     gameAreaRight.appendChild(gameAreaRight4);
 
-    // // Create Submit button
-    
-    // let submitAnswerButton = document.createElement("button");
-    // gameAreaDiv.appendChild(submitAnswerButton);
-    // submitAnswerButton.innerHTML = "Next question";
-    // submitAnswerButton.id = "next-question-button"
-    // submitAnswerButton.addEventListener("click",checkAnswer);
+    // Create Submit button
+    let submitAnswerButton = document.createElement("button");
+    gameAreaLeft2.appendChild(submitAnswerButton);
+    submitAnswerButton.innerHTML = "Next question";
+    submitAnswerButton.id = "next-question-button";
+    // submitAnswerButton.addEventListener("click",checkAnswer());
 
-    // // Create Skip button
-    // let skipQuestionButton = document.createElement("button");
-    // skipQuestionButton.innerHTML = "Skip";
-    // skipQuestionButton.id = "skip-question-button";
-    // gameAreaDiv.appendChild(skipQuestionButton);
-    // skipQuestionButton.addEventListener("click",skipQuestion);
+    // Create Skip button
+    let skipQuestionButton = document.createElement("button");
+    skipQuestionButton.innerHTML = "Skip";
+    skipQuestionButton.id = "skip-question-button";
+    gameAreaLeft2.appendChild(skipQuestionButton);
+    skipQuestionButton.addEventListener("click",skipQuestion);
 
-    //Create progress tally
-
+    // Create progress tally
     let questionsAnswered = document.createElement("p");
     questionsAnswered.innerHTML = 0;
     questionsAnswered.id = "questionsAnsweredTally";
@@ -345,63 +338,78 @@ function openGameArea() {
 
 function generateQuestion () {
 
-    // Creates the random numbers - if time, add 6 for hard difficulty
-    let num1 = Math.floor(Math.random() * easyFrench.length);
-    let num2 = Math.floor(Math.random() * easyFrench.length);
-    let num3 = Math.floor(Math.random() * easyFrench.length);
-    let num4 = Math.floor(Math.random() * easyFrench.length);
+    // console.log(gameDifficulty);
 
-    // Put random numbers into an array
-    let mcRandNumbers = [num1, num2, num3, num4];
-    // console.log(`Random numbers are ${mcRandNumbers}`);
+    let numOfQuestions = "";
+    let questionLanguage = "";
+    let answerLanguage = "";
+    let timeLimit = "";
 
-    // Index each number to a French/English word
-    let mc1 = easyFrench[num1];
-    let mc2 = easyFrench[num2];
-    let mc3 = easyFrench[num3];
-    let mc4 = easyFrench[num4];
+    if (gameDifficulty === "Easy") {
+        numOfQuestions = 4;
+        questionLanguage = "French";
+        answerLanguage = "English";
+        timeLimit = 60;
+    } else if (gameDifficulty === "Medium") {
+        numOfQuestions = 5;
+        questionLanguage = "English";
+        answerLanguage = "French";
+        timeLimit = 30;
+    } else {
+        numOfQuestions = 6;
+        questionLanguage = "English";
+        answerLanguage = "French";
+        timeLimit = 15;
+    };
 
-    let mcAns1 = easyEnglish[num1];
-    let mcAns2 = easyEnglish[num2];
-    let mcAns3 = easyEnglish[num3];
-    let mcAns4 = easyEnglish[num4];
+    console.log("Number of questions is: ",numOfQuestions);
+    console.log("Question is in: ",questionLanguage);
+    console.log("Answers is in :",answerLanguage);
+    console.log("Time limit is :",timeLimit);
 
-    // Put these into an array
-    let mcRandWords = [mc1, mc2, mc3, mc4];
-    // console.log(`The answers Fr are ${mcRandWords}`);
-    let mcAnsWords = [mcAns1, mcAns2, mcAns3, mcAns4];
-    // console.log(`The answers Eng are ${mcAnsWords}`);
+    let mcRandNumbers = [];
+    let mcRandWords = [];
+    let mcAnsWords = [];
+
+    for (i = 0; i < numOfQuestions; i++) {
+        mcRandNumbers[i] = Math.floor(Math.random() * easyFrench.length);
+        mcRandWords[i] = easyFrench[mcRandNumbers[i]];
+        mcAnsWords[i] = easyEnglish[mcRandNumbers[i]];
+    }
+
+    console.log(mcRandWords);
+    console.log(mcAnsWords);
 
     // Pick a value between 1 and 4
-    let num0 = Math.floor(Math.random() * 4);
+    let num0 = Math.floor(Math.random() * numOfQuestions);
     // console.log(`Random choice num between 1 and 4 is ${num0}`);
 
     // Index the answer in French
     let mcAnswer = mcAnsWords[num0];
-    let answerFr = document.createElement("p");
-    answerFr.innerHTML = (`${mcAnswer}`);
-    answerFr.id = "mcAnswerFrId";
-    // console.log(`The question Eng is ${mcAnswer}`);
+    
+//     let answerFr = document.createElement("p");
+//     answerFr.innerHTML = (`${mcAnswer}`);
+//     answerFr.id = "mcAnswerFrId";
+//     console.log(`The question Eng is ${mcAnswer}`);
 
-    // Index the answer in English
-    let mcQuestion = mcRandWords[num0];
-    let answerEn = document.createElement("p");
-    answerEn.innerHTML = (`${mcQuestion}`);
-    answerEn.id = "mcAnswerEnId";
-    // console.log(`The question Fr is ${mcQuestion}`);
+//     // Index the answer in English
+//     let mcQuestion = mcRandWords[num0];
+//     let answerEn = document.createElement("p");
+//     answerEn.innerHTML = (`${mcQuestion}`);
+//     answerEn.id = "mcAnswerEnId";
+//     console.log(`The question Fr is ${mcQuestion}`);
+
+//     let answers = [mcAnswer, mcQuestion];
 
     // Create the question
     let gameAreaTop = document.getElementById("game-area-top");
     let questionh2 = document.createElement("h2");
     questionh2.id = "question-h2"
-    questionh2.innerHTML = (`What is ${mcAnswer} in French?`);
+    questionh2.innerHTML = (`What is ${mcAnswer} in ${questionLanguage}?`);
     gameAreaTop.appendChild(questionh2);
 
-    // gameAreaDiv.appendChild(answerFr);
-    // mainDiv.appendChild(answerEn);
-
     // Create form for multiple choice radio buttons
-    let gameAreaLeft = document.getElementById("game-area-left");
+    let gameAreaLeft = document.getElementById("game-area-left1");
     let multipleChoiceForm = document.createElement("form");
     multipleChoiceForm.id = "answer-multiple-choice";
     gameAreaLeft.appendChild(multipleChoiceForm);
@@ -416,10 +424,14 @@ function generateQuestion () {
         radio1.classList.add("multiple-choice-radios");
         radio1.id = (`userAnswer ${mcRandWords[i]}`);
         label1.innerHTML = mcRandWords[i];
+        label1.classList.add("multiple-choice-labels");
         multipleChoiceForm.appendChild(radio1);
         multipleChoiceForm.appendChild(label1);  
     }
 
+//     gameAreaLeft.appendChild(answerFr);
+//     gameAreaLeft.appendChild(answerEn);
+     
 }
 
 // /**
@@ -428,130 +440,136 @@ function generateQuestion () {
 //  * audible feedback from the 'ping', increments the answer tally whether correct or incorrect,
 //  * and increments the progress tally
 //  */
-//  function checkAnswer(mcAnswer) {
+//  function checkAnswer() {
+
+//     alert("CHECKANSWER");
+    
+//         let trueAnswerFr = document.getElementById("mcAnswerFrId").innerText;
+//         console.log(`True answer Fr = ${trueAnswerFr}`);
+    
+
+// //     let trueAnswerEn = document.getElementById("mcAnswerEnId").innerText;
+// //     console.log(`True answer En = ${trueAnswerEn}`);
+
+// //     let userAnswers = document.getElementsByTagName("input");
+// //     // console.log(userAnswers);
+
+// //     let userAnswer1 = document.getElementsByTagName("input")[0].checked;
+// //     let userAnswer2 = document.getElementsByTagName("input")[1].checked;
+// //     let userAnswer3 = document.getElementsByTagName("input")[2].checked;
+// //     let userAnswer4 = document.getElementsByTagName("input")[3].checked;
+
+// //     let userLabel1 = document.getElementsByTagName("label")[0];
+// //     let userLabel2 = document.getElementsByTagName("label")[1];
+// //     let userLabel3 = document.getElementsByTagName("label")[2];
+// //     let userLabel4 = document.getElementsByTagName("label")[3];
+
+// //     let pickedAnswer = "";
+// //     for(i = 0; i < 4 ; i++) {
+// //         if (document.getElementsByTagName("input")[i].checked){
+// //             pickedAnswer = document.getElementsByTagName("label")[i].innerText;
+// //             // console.log(`Picked answer is ${pickedAnswer}`);
+// //         } 
+// //     }
 
 
-//     let trueAnswerFr = document.getElementById("mcAnswerFrId").innerText;
-//     // console.log(`True answer Fr = ${trueAnswerFr}`);
+// //     let oldCorrectTally = parseInt((document.getElementById("correctTally").innerText));
+// //     let oldIncorrectTally = parseInt((document.getElementById("incorrectTally").innerText));
+// //     let oldQuestionsAnswered = parseInt((document.getElementById("questionsAnsweredTally").innerText));
+// //     let oldprogressTally = parseInt((document.getElementById("progress-tally").innerText));
+// //     console.log(oldprogressTally);
 
-//     let trueAnswerEn = document.getElementById("mcAnswerEnId").innerText;
-//     // console.log(`True answer En = ${trueAnswerEn}`);
-
-//     let userAnswers = document.getElementsByTagName("input");
-//     // console.log(userAnswers);
-
-//     let userAnswer1 = document.getElementsByTagName("input")[0].checked;
-//     let userAnswer2 = document.getElementsByTagName("input")[1].checked;
-//     let userAnswer3 = document.getElementsByTagName("input")[2].checked;
-//     let userAnswer4 = document.getElementsByTagName("input")[3].checked;
-
-//     let userLabel1 = document.getElementsByTagName("label")[0];
-//     let userLabel2 = document.getElementsByTagName("label")[1];
-//     let userLabel3 = document.getElementsByTagName("label")[2];
-//     let userLabel4 = document.getElementsByTagName("label")[3];
-
-//     let pickedAnswer = "";
-//     for(i = 0; i < 4 ; i++) {
-//         if (document.getElementsByTagName("input")[i].checked){
-//             pickedAnswer = document.getElementsByTagName("label")[i].innerText;
-//             // console.log(`Picked answer is ${pickedAnswer}`);
-//         } 
-//     }
+// //     if (pickedAnswer === trueAnswerEn) {
+// //         newCorrectTally = oldCorrectTally += 1;
+// //         correctTally.innerHTML = newCorrectTally;
+// //     } else {
+// //         newincorrectTally = oldIncorrectTally += 1;
+// //         incorrectTally.innerHTML = newincorrectTally;
+// //     }
 
 
-//     let oldCorrectTally = parseInt((document.getElementById("correctTally").innerText));
-//     let oldIncorrectTally = parseInt((document.getElementById("incorrectTally").innerText));
-//     let oldQuestionsAnswered = parseInt((document.getElementById("questionsAnsweredTally").innerText));
-//     let oldProgressTally2 = parseInt((document.getElementById("progressTally").innerText));
+// //     newQuestionsAnswered = oldQuestionsAnswered += 1;
+
+// //     questionsAnsweredTally.innerHTML =  newQuestionsAnswered;
 
 
-//     console.log(pickedAnswer);
-//     console.log(trueAnswerEn);
-
-//     if (pickedAnswer === trueAnswerEn) {
-//         newCorrectTally = oldCorrectTally += 1;
-//         correctTally.innerHTML = newCorrectTally;
-//     } else {
-//         newincorrectTally = oldIncorrectTally += 1;
-//         incorrectTally.innerHTML = newincorrectTally;
-//     }
+// //     endGameScore = newQuestionsAnswered -=1;
 
 
-//     newQuestionsAnswered = oldQuestionsAnswered += 1;
-//     questionsAnsweredTally.innerHTML =  newQuestionsAnswered;
-
-//    progressTally.innerHTML = (`${newQuestionsAnswered} / ${gameLength}`);
-
-//    console.log(gameLength);
-//    console.log(newQuestionsAnswered);
-
-//     endGameScore = newQuestionsAnswered -=1;
-
-//    if (endGameScore === gameLength){
-//        endGame();
-//    } 
-
-
-
-//    // if radio button picked textContent === answer
+// //    // if radio button picked textContent === answer
 //     document.getElementsByTagName("h2")[0].remove();
 //     document.getElementsByTagName("form")[0].remove();
-//     mcAnswerEnId.remove();
-//     mcAnswerFrId.remove();
-
-
+    
+//     // document.getElementById("mcAnswerEnId").remove();
+//     // document.getElementById("mcAnswerFrId").remove();
 
 //     generateQuestion();
 
-// }
-
-
-// /**
-//  * This functions is called by the Skip Question button on the game area page
-//  * It allows users to pass to the next question if they don't know the answer
-//  * And it tallies up the Pass score
-//  * It just re-generates new multiple choice questions
-//  */
-// function skipQuestion() {
-
-//     document.getElementsByTagName("h2")[0].remove();
-//     document.getElementsByTagName("form")[0].remove();
-
-//     generateQuestion();
-
-//     let oldSkipTally = parseInt((document.getElementById("skipTally").innerText));
-//     let newSkipTally = oldSkipTally += 1;
-//     skipTally.innerHTML = newSkipTally;
-
-//     let oldQuestionsAnswered = parseInt((document.getElementById("questionsAnsweredTally").innerText));
-//     let oldProgressTally2 = parseInt((document.getElementById("progressTally").innerText));
-//     newQuestionsAnswered = oldQuestionsAnswered += 1;
-//     questionsAnsweredTally.innerHTML =  newQuestionsAnswered;
-
-//     progressTally.innerHTML = (`${newQuestionsAnswered} / ${gameLength}`);
-
-//     document.getElementById("mcAnswerFrId").remove();
-//     document.getElementById("mcAnswerEnId").remove();
+// //     if (endGameScore === gameLength){
+// //         endGame();
+// //     } 
 
 // }
 
 
-// /**
-//  * This function will call up the end game screen, displaying the answers summary and 
-//  * feedback.  Called by "See score" button.
-//  */
-// function endGame() {
-//     //  Congratulations message, score, buttons to return to home screen
-//     alert("END GAME");
-// }
+// // // /**
+// // //  * This functions is called by the Skip Question button on the game area page
+// // //  * It allows users to pass to the next question if they don't know the answer
+// // //  * And it tallies up the Pass score
+// // //  * It just re-generates new multiple choice questions
+// // //  */
+function skipQuestion() {
+
+    document.getElementsByTagName("h2")[0].remove();
+    document.getElementsByTagName("form")[0].remove();
+
+    generateQuestion();
+
+    let oldSkipTally = parseInt((document.getElementById("skipTally").innerText));
+    let newSkipTally = oldSkipTally += 1;
+    skipTally.innerHTML = newSkipTally;
+
+    let oldQuestionsAnswered = parseInt((document.getElementById("questionsAnsweredTally").innerText));
+    // let oldProgressTally2 = parseInt((document.getElementById("progressTally").innerText));
+    // newQuestionsAnswered = oldQuestionsAnswered += 1;
+    // questionsAnsweredTally.innerHTML =  newQuestionsAnswered;
+
+    // progressTally.innerHTML = (`${newQuestionsAnswered} / ${gameLength}`);
+
+    // document.getElementById("mcAnswerFrId").remove();
+    // document.getElementById("mcAnswerEnId").remove();
+
+}
 
 
-// /**
-//  * This function will be called by a button named "Back to Home Screen" or "Reset Game",
-//  * will display a warning message about resetting, then reload the introSection function 
-//  * and all other answer tallies etc
-//  */
-// function resetGame() {
-//     // call function introSection to restart the game
+// // // /**
+// // //  * This function will call up the end game screen, displaying the answers summary and 
+// // //  * feedback.  Called by "See score" button.
+// // //  */
+// // // function endGame() {
+// // //     //  Congratulations message, score, buttons to return to home screen
+// // //     document.getElementById("game-area-div-id").remove();
+// // //     let mainDiv = document.getElementById("main-div");
 
-// }
+// // //     let endGameDiv = document.createElement("div");
+// // //     mainDiv.appendChild(endGameDiv);
+
+// // //     let congratsMessage = document.createElement("h1");
+// // //     congratsMessage.innerHTML = "Congratulations!"
+// // //     endGameDiv.appendChild(congratsMessage);
+
+    
+
+
+// // // }
+
+
+// // // /**
+// // //  * This function will be called by a button named "Back to Home Screen" or "Reset Game",
+// // //  * will display a warning message about resetting, then reload the introSection function 
+// // //  * and all other answer tallies etc
+// // //  */
+// // // function resetGame() {
+// // //     // call function introSection to restart the game
+
+// // // }
