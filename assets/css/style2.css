@@ -1,0 +1,65 @@
+
+body, html {
+    height: 100vh;
+    width: 100vw;
+    background-color: steelblue;
+}
+
+#main-div {
+    position: relative;
+    top: 15%;
+    margin: auto;
+    width: 80%;
+    height: 70%;
+    border: solid black;
+    background-color: white;
+}
+
+/* INTRO SECTION */ 
+
+#intro-section-div, #game-options-div-id {
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    position: relative;
+    top: 10%;
+    text-align: center;
+}
+
+#welcome-header {
+    font-size: 60px;
+    position: relative;
+    top: 5%;
+}
+
+#hello-intro {
+    font-size: 40px;  
+    position: relative;
+    top: 5%;
+}
+
+#intro-form{
+    width: 40%;
+    height: 25%;
+    position: relative;
+    top: 15%;
+    margin: auto;
+}
+
+#name-entry {
+    width: 80%;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+}
+
+#name-button {
+    font-size: 30px;
+    width: 30%;
+    height: 40%;
+    position: relative;
+    top: 15%;
+}
+
+/*  GAME OPTIONS SCREEN   */
+

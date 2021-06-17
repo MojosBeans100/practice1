@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
+
 /* INTRO SECTION SCREEN */
 
 body, html {
@@ -5,18 +7,28 @@ body, html {
     width: 100vw;
 }
 
+body {
+    background-image: url("/assets/images/pexels-alex-azabache-4039924.jpg");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    
+}
+
 #main-div {
-    width: 80%;
-    height: 70%;
-    margin-top: calc(50% - 40%);
-    margin-left: calc(50% - 35%);
+    font-family: 'Padauk', sans-serif;
+    position: relative;
+    width: 70%;
+    left: calc(50% - 35%);
+    height: 60%;
+    top: calc(50% - 30%);
     border: solid black 2px;
-    /* margin-top: 50px; */
-    border-radius: 2em;
+    border-radius: 1em;
+    background-color: white;
 }
 
 .introSectionDiv {
-    border: solid red;
+    /* border: solid red; */
 }
 
 #welcome-header {
@@ -32,14 +44,15 @@ body, html {
 
 #name-entry {
     height: 40px;
-    width: 95%;
+    width: 100%;
+    
     text-align: center;
     font-size: 35px;
     margin: auto;
 }
 
 #intro-form {
-    border: solid purple;
+     border: solid purple; 
     width: 50%;
     margin: auto;
     margin-top: 100px;
@@ -47,11 +60,19 @@ body, html {
 
 #name-button {
     margin: auto;
-    font-size: 40px;
-    width: 30%;
-    margin-left: 35%;
+    font-size: 25px;
+    width: 70%;
+    height: 60px;
+    margin-left: 15%;
     margin-top: 50px;
-    background-color: palegoldenrod;
+    background-color: black;
+    color: white;
+    border-radius: 0.2em;
+    letter-spacing: 5px;
+}
+
+#name-button:hover{
+    background-color: rgb(158, 189, 184);
 }
 
 /* CHOOSE GAME OPTIONS SCREEN */
@@ -158,7 +179,7 @@ body, html {
     height: 80%;
     width: 20%;
     float: right;
-    border: solid green;
+    
     display: flex;
     flex-direction: column;
 
@@ -166,32 +187,35 @@ body, html {
 }
 
 .game-area-right-divs {
-    border: solid pink;
+  
     height: 25%;
 }
 
 .tally-labels {
     padding: 0;
-    margin-top: 10px;
-    font-size: 18px;
+    margin-top: 0;
+    font-size: 25px;
+    
 }
 
 
 .tally-numbers {
     padding: 0;
-    margin: 0;
-    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 40px;
+    
 }
 
 .multiple-choice-radios {
-    margin-top: 50px;
-    margin-right: 40px;
-    margin-left: 230px;
+    margin-top: 70px;
+    margin-right: 100px;
+    margin-left: 40%;
 }
 
 .multiple-choice-labels {
     margin-right: 100px;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 
@@ -202,4 +226,8 @@ body, html {
 
 #mcAnswerEnId {
     /* color: white; */
+}
+
+#mcAnswer {
+    color: red;
 }
