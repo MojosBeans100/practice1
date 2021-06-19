@@ -1,11 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap');
+
 
 body, html {
     height: 100vh;
     width: 100vw;
-    background-color: steelblue;
+    /* background-color: steelblue; */
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+body {
+    background-image: url("/assets/images/pexels-alex-azabache-4039924.jpg");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 #main-div {
+    box-shadow: 5px 10px 8px 10px #888888;
     position: relative;
     top: 15%;
     margin: auto;
@@ -13,6 +24,22 @@ body, html {
     height: 70%;
     border: solid black;
     background-color: white;
+}
+
+.all-buttons {
+    color: #fff !important;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: #60a3bc;
+	padding: 20px;
+	border-radius: 50px; 
+    width: 200px;
+    height: 60px;
+    font-size: 15px;
+}
+
+.all-buttons:hover {
+    background: #0c5d7a;
 }
 
 /* INTRO SECTION */ 
@@ -42,7 +69,7 @@ body, html {
     width: 40%;
     height: 25%;
     position: relative;
-    top: 15%;
+    top: 12%;
     margin: auto;
 }
 
@@ -54,12 +81,167 @@ body, html {
 }
 
 #name-button {
-    font-size: 30px;
-    width: 30%;
-    height: 40%;
-    position: relative;
-    top: 15%;
+   margin-top: 10%;
 }
 
 /*  GAME OPTIONS SCREEN   */
 
+#game-options-div-id {
+    /* border: solid orange; */
+}
+
+#welcome-message {
+    font-size: 50px;
+}
+
+#choose-game-options-text {
+    font-size: 30px;
+}
+
+/* #difficulty-form {
+    border: solid red;
+} */
+
+#difficulty-h2, #game-length-h2 {
+    font-size: 25px;
+    
+}
+
+#game-length-form {
+    /* border: solid yellow; */
+}
+
+.game-difficulty-radio-buttons, .game-length-radio-buttons {
+    width: 20px;
+    height: 20px;
+    
+}
+
+.game-difficulty-radio-labels, .game-length-radio-labels {
+    font-size: 30px;
+    margin-left: 25px;
+    margin-right: 80px;
+}
+
+/* #home-button, #play-game-button {
+    font-size: 30px;
+    width: 30%;
+    height: 10%;
+    margin-top: 20px;
+} */
+
+/*  PLAY GAME   */
+
+#game-area-div-id {
+    height: 100%;
+    width: 100%;
+}
+
+#game-area-top {
+    height: 20%;
+    width: 100%;
+    /* border: solid pink; */
+    text-align: center;
+    font-size: 30px;
+    
+}
+
+#question-of {
+    font-size: 20px;
+    
+}
+
+#game-area-left {
+    height: 80%;
+    width: 75%;
+    float: left;
+    /* border: solid blue; */
+}
+
+#game-area-left1 {
+    height: 80%;
+    border: solid green;
+}
+
+#game-area-left2 {
+    height: 20%;
+    width: 90%;
+    margin: auto;
+    /* border: solid orange; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.multiple-choice-radios {
+    margin-left: 25%;
+    margin-right: 10%;
+    margin-top: 4%;
+}
+
+.multiple-choice-labels {
+    font-size: 25px;
+    margin-right: 40%;
+}
+
+ #next-question-button {
+    font-weight: bold;
+} 
+
+
+#game-area-right {
+    height: 80%;
+    width: 20%;
+    float: right;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    /* border: solid pink; */
+    text-align: center;
+}
+
+.game-area-right-divs {
+  
+    height: 33%;
+    /* border: solid blue; */
+}
+
+.tally-labels {
+    position: relative;
+    top: 2%;
+    font-size: 25px;
+}
+
+.tally-numbers {
+    position: relative;
+    top: 5%;
+}
+
+#correctTally {
+    color: green;
+}
+
+#incorrectTally {
+    color: red;
+}
+
+/*   END GAME DIV        */
+ 
+#end-game-div {
+    margin: auto;
+    /* border: solid yellow; */
+    height: 100%;
+    width: 60%;
+    text-align: center;
+
+}
+
+#congrats-message {
+    
+    font-size: 60px;
+}
+
+#end-game-home-button{
+    position: relative;
+    bottom: 10px;
+    width: 180px;
+}

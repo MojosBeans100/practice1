@@ -58,9 +58,11 @@ function introSection() {
     nameInput.id = "name-entry";
     introForm.appendChild(nameInput);
 
+
     let firstSubmitButton = document.createElement("button");
     firstSubmitButton.type = "submit";
     firstSubmitButton.id = "name-button";
+    firstSubmitButton.classList.add("all-buttons");
     firstSubmitButton.innerHTML = "OK";
     introForm.appendChild(firstSubmitButton);
 
@@ -68,7 +70,16 @@ function introSection() {
         event.preventDefault()
     });
     // firstSubmitButton.onclick = "chooseGameOptions()";
-    firstSubmitButton.addEventListener("click", chooseGameOptions);
+    firstSubmitButton.addEventListener("click", function () {
+        if (nameInput.value == "") {
+            alert("Name must be filled out");
+            return false
+        } else {
+            chooseGameOptions();
+        }
+
+
+    });
 
 }
 
@@ -83,6 +94,7 @@ function chooseGameOptions() {
     // Get the main div as the parent
     let mainDiv = document.getElementById("main-div");
     let userName = document.getElementById("name-entry").value;
+
 
     // Create Game Options Screen div
     let gameOptionsDiv = document.createElement("div");
@@ -109,6 +121,7 @@ function chooseGameOptions() {
 
     // Game difficulty text
     let difficultyh2 = document.createElement("h2");
+    difficultyh2.id = "difficulty-h2";
     difficultyh2.innerHTML = (`Please choose a game difficulty`);
     difficultyForm.appendChild(difficultyh2);
 
@@ -145,6 +158,7 @@ function chooseGameOptions() {
 
     // Game length text
     let gamelengthh2 = document.createElement("h2");
+    gamelengthh2.id = "game-length-h2";
     gamelengthh2.innerHTML = (`Now choose how many questions you'd like to answer`);
     gameLengthForm.appendChild(gamelengthh2);
 
@@ -171,6 +185,7 @@ function chooseGameOptions() {
     // Create button to display "Play!" - link to function runGame
     let playButton = document.createElement("button");
     playButton.innerHTML = "Play!";
+    playButton.classList.add("all-buttons");
     playButton.id = "play-game-button";
     gameOptionsDiv.appendChild(playButton);
 
@@ -201,9 +216,10 @@ function chooseGameOptions() {
 
     // Create button to return to homepage, goes back to intro screen with name input etc
     let homeButton = document.createElement("button");
-    homeButton.id = "home-button"
+    homeButton.id = "home-button";
+    homeButton.classList.add("all-buttons");
     homeButton.innerHTML = "Return to Home";
-    mainDiv.appendChild(homeButton);
+    gameOptionsDiv.appendChild(homeButton);
 
     // Remove the intro screen div
     document.getElementById("intro-section-div").remove();
@@ -272,16 +288,29 @@ function openGameArea() {
     gameAreaRight3.classList.add("game-area-right-divs");
     gameAreaRight.appendChild(gameAreaRight3);
 
-    let gameAreaRight4 = document.createElement("div");
-    gameAreaRight4.classList.add("game-area-right-divs");
-    gameAreaRight.appendChild(gameAreaRight4);
+    // let gameAreaRight4 = document.createElement("div");
+    // gameAreaRight4.classList.add("game-area-right-divs");
+    // gameAreaRight.appendChild(gameAreaRight4);
 
-    
+    // Create button to return to homepage, goes back to intro screen with name input etc
+    let homeButton = document.createElement("button");
+    homeButton.id = "home-button"
+    homeButton.innerHTML = "Return to Home";
+    homeButton.classList.add("all-buttons");
+    gameAreaLeft2.appendChild(homeButton);
+    homeButton.addEventListener("click", function () {
+        alert("Are you sure?  You will lose all game progress.");
+        homeButton.remove();
+        gameAreaDiv.remove();
+        introSection();
+    });
+
 
     // Create Submit button
     let submitAnswerButton = document.createElement("button");
     gameAreaLeft2.appendChild(submitAnswerButton);
     submitAnswerButton.innerHTML = "Next question";
+    submitAnswerButton.classList.add("all-buttons");
     submitAnswerButton.id = "next-question-button";
     submitAnswerButton.addEventListener("click", function () {
 
@@ -292,23 +321,24 @@ function openGameArea() {
     let skipQuestionButton = document.createElement("button");
     skipQuestionButton.innerHTML = "Skip";
     skipQuestionButton.id = "skip-question-button";
+    skipQuestionButton.classList.add("all-buttons");
     gameAreaLeft2.appendChild(skipQuestionButton);
     skipQuestionButton.addEventListener("click", skipQuestion);
 
-    // Create progress tally
-    let questionsAnswered = document.createElement("p");
-    questionsAnswered.innerHTML = 0;
-    questionsAnswered.id = "questionsAnsweredTally";
+    // // Create progress tally
+    // let questionsAnswered = document.createElement("p");
+    // questionsAnswered.innerHTML = 0;
+    // questionsAnswered.id = "questionsAnsweredTally";
 
-    let progressTally = document.createElement("p");
-    progressTally.id = "progress-tally";
-    progressTally.classList.add("tally-numbers");
-    progressTally.innerHTML = (`${questionsAnswered.innerText} / ${gameLength}`);
+    // let progressTally = document.createElement("p");
+    // progressTally.id = "progress-tally";
+    // progressTally.classList.add("tally-numbers");
+    // progressTally.innerHTML = (`${questionsAnswered.innerText} / ${gameLength}`);
 
-    let progressTallyLabel = document.createElement("p");
-    progressTallyLabel.classList.add("tally-labels");
-    progressTallyLabel.id = "progress-tally-label";
-    progressTallyLabel.innerHTML = "Progress";
+    // let progressTallyLabel = document.createElement("p");
+    // progressTallyLabel.classList.add("tally-labels");
+    // progressTallyLabel.id = "progress-tally-label";
+    // progressTallyLabel.innerHTML = "Progress";
 
     // Create skip tally
     let skipTally = document.createElement("p");
@@ -319,7 +349,7 @@ function openGameArea() {
     let skipTallyLabel = document.createElement("p");
     skipTallyLabel.id = "skip-tally-label";
     skipTallyLabel.classList.add("tally-labels");
-    skipTallyLabel.innerHTML = "Skipped";
+    skipTallyLabel.innerHTML = "skipped";
 
     // Create correct tally
     let correctTally = document.createElement("p");
@@ -330,7 +360,7 @@ function openGameArea() {
     let correctTallyLabel = document.createElement("p");
     correctTallyLabel.id = "correct-tally-label";
     correctTallyLabel.classList.add("tally-labels");
-    correctTallyLabel.innerHTML = "Correct";
+    correctTallyLabel.innerHTML = "correct";
 
     // Create incorrect tally
     let incorrectTally = document.createElement("p");
@@ -341,23 +371,23 @@ function openGameArea() {
     let incorrectTallyLabel = document.createElement("p");
     incorrectTallyLabel.id = "incorrect-tally-label";
     incorrectTallyLabel.classList.add("tally-labels");
-    incorrectTallyLabel.innerHTML = "Incorrect";
+    incorrectTallyLabel.innerHTML = "incorrect";
 
     // Remove game options screen
     document.getElementById("game-options-div-id").remove();
 
     // Add all tallies and labels to game area
-    gameAreaRight1.appendChild(progressTally);
-    gameAreaRight1.appendChild(progressTallyLabel);
-    gameAreaRight4.appendChild(skipTally);
-    gameAreaRight4.appendChild(skipTallyLabel);
-    gameAreaRight2.appendChild(correctTally);
-    gameAreaRight2.appendChild(correctTallyLabel);
-    gameAreaRight3.appendChild(incorrectTally);
-    gameAreaRight3.appendChild(incorrectTallyLabel);
+    // gameAreaRight1.appendChild(progressTally);
+    // gameAreaRight1.appendChild(progressTallyLabel);
+    gameAreaRight3.appendChild(skipTally);
+    gameAreaRight3.appendChild(skipTallyLabel);
+    gameAreaRight1.appendChild(correctTally);
+    gameAreaRight1.appendChild(correctTallyLabel);
+    gameAreaRight2.appendChild(incorrectTally);
+    gameAreaRight2.appendChild(incorrectTallyLabel);
 
 
-    questionsAnswered++
+
     generateQuestion();
 
 }
@@ -386,7 +416,7 @@ function generateQuestion() {
         timeLimit = 5;
     };
 
-  
+
 
     // console.log(`Num of questions ${numOfQuestions}`);
 
@@ -434,6 +464,13 @@ function generateQuestion() {
     questionh2.innerHTML = (`What is ${mcAnswer} in ${questionLanguage}?`);
     gameAreaTop.appendChild(questionh2);
 
+    let questionOf = document.createElement("h2");
+    questionOf.id = "question-of";
+    questionOf.innerHTML = (`Question ${questionsAnswered + 1} of ${gameLength}`);
+
+    let gameAreaLeft1 = document.getElementById("game-area-left1");
+    gameAreaLeft1.appendChild(questionOf);
+
     // Create form for multiple choice radio buttons
     let gameAreaLeft = document.getElementById("game-area-left1");
     let multipleChoiceForm = document.createElement("form");
@@ -455,21 +492,24 @@ function generateQuestion() {
         multipleChoiceForm.appendChild(label1);
     }
 
+    // console.log(multipleChoiceForm[3]);
+    // console.log(multipleChoiceForm.length);
+
     //   // Create timer
-      
+
     //   let timer = document.createElement("h1");
     //   timer.id = "countdown";
     //   gameAreaLeft.appendChild(timer);
-  
+
     //   // create countdown timer - stackOverflow
-      
+
     //   downloadTimer = setInterval(function(){
     //       if(timeLimit <= 0){
     //         clearInterval(downloadTimer);
     //         document.getElementsByTagName("h2")[0].remove();
     //         document.getElementsByTagName("form")[0].remove();
     //         generateQuestion();
-            
+
     //       } else {
     //         document.getElementById("countdown").innerHTML = timeLimit + " seconds remaining";
     //       }
@@ -489,14 +529,16 @@ function generateQuestion() {
  */
 function checkAnswer() {
 
-    questionsAnswered++;
+
 
     let nums = document.getElementById("answer-multiple-choice").length;
+    let nums1 = nums - 1;
 
     let oldCorrectTally = parseInt((document.getElementById("correctTally").innerText));
     let oldIncorrectTally = parseInt((document.getElementById("incorrectTally").innerText));
 
     console.log(`Nums = ${nums}`);
+    console.log(`Nums1 = ${nums1}`);
 
     let pickedAnswer = "";
     let checkedRadios = [];
@@ -506,47 +548,51 @@ function checkAnswer() {
     //check status of radio buttons, if one is checked, output answer
     for (i = 0; i < nums; i++) {
         if (document.getElementsByTagName("input")[i].checked) {
-        
-        pickedAnswer = document.getElementsByTagName("label")[i].innerText;
-        console.log(`Picked answer is ${pickedAnswer}`);
-        // if radio button picked textContent === answer
-        document.getElementsByTagName("h2")[0].remove();
-        document.getElementsByTagName("form")[0].remove();
-        
-        if (pickedAnswer === mcQuestion) {
-            newCorrectTally = oldCorrectTally += 1;
-            correctTally.innerHTML = newCorrectTally;
+
+            pickedAnswer = document.getElementsByTagName("label")[i].innerText;
+            console.log(`Picked answer is ${pickedAnswer}`);
+            // if radio button picked textContent === answer
+            document.getElementsByTagName("h2")[0].remove();
+            document.getElementsByTagName("form")[0].remove();
+            document.getElementById("question-of").remove();
+
+            if (pickedAnswer === mcQuestion) {
+                newCorrectTally = oldCorrectTally += 1;
+                correctTally.innerHTML = newCorrectTally;
+            } else {
+                newincorrectTally = oldIncorrectTally += 1;
+                incorrectTally.innerHTML = newincorrectTally;
+            }
+
+            // clearInterval("downloadTimer");
+            questionsAnswered++;
+            generateQuestion();
+            break;
+
         } else {
-            newincorrectTally = oldIncorrectTally += 1;
-            incorrectTally.innerHTML = newincorrectTally;
+            console.log(document.getElementsByTagName("input")[i].checked);
+            console.log(`i = ${i}`);
+
+            if (i === nums1) {
+                alert("Please choose an answer, or skip the question");
+            }
+            continue;
         }
-        
-        // clearInterval("downloadTimer");
-        generateQuestion();
-        break;
-
-    } else {
-        console.log(document.getElementsByTagName("input")[i].checked);
-        console.log(`i = ${i}`);
-        if (i === (nums-=1)) {
-            alert("Please choose an answer, or skip the question");
-        } 
-    continue;
-}  }
+    }
 
 
 
 
-console.log(`Picked answer is ${pickedAnswer}`);
+    console.log(`Picked answer is ${pickedAnswer}`);
+
+
+    console.log(`Questions answers = ${questionsAnswered}`);
 
 
 
-
-
-
-if (questionsAnswered === gameLength) {
-    endGame();
-}
+    if (questionsAnswered === gameLength) {
+        endGame();
+    }
 
 }
 
@@ -563,6 +609,7 @@ function skipQuestion() {
 
     document.getElementsByTagName("h2")[0].remove();
     document.getElementsByTagName("form")[0].remove();
+    document.getElementById("question-of").remove();
 
     generateQuestion();
 
@@ -582,41 +629,62 @@ function skipQuestion() {
  */
 function endGame() {
 
-    let endScore = document.getElementById("correctTally").innerText;
+    // get scores 
+    let finalCorrect = document.getElementById("correctTally").innerText;
+    let finalIncorrect = document.getElementById("incorrectTally").innerText;
 
-    //  Congratulations message, score, buttons to return to home screen
-    document.getElementById("game-area-div-id").remove();
+    // create endGame div
     let mainDiv = document.getElementById("main-div");
-
     let endGameDiv = document.createElement("div");
+    endGameDiv.id = "end-game-div";
     mainDiv.appendChild(endGameDiv);
 
     let congratsMessage = document.createElement("h1");
-    congratsMessage.innerHTML = "Congratulations!"
+    congratsMessage.id = "congrats-message";
     endGameDiv.appendChild(congratsMessage);
 
     let endScoreMessage = document.createElement("h2");
-    endScoreMessage.innerHTML = (`You scored ${endScore} / ${gameLength}!`);
+    endScoreMessage.id = "end-score-message";
+    endScoreMessage.innerHTML = (`You scored ${finalCorrect} / ${gameLength}!`);
     endGameDiv.appendChild(endScoreMessage);
 
-    let homeButton = document.createElement("button");
-    homeButton.innerHTML = "Return to Homepage";
-    homeButton.addEventListener("click", function () {
+    let motivationMessage = document.createElement("h3");
+    motivationMessage.id = "motivation-message";
+    endGameDiv.appendChild(motivationMessage);
+
+    console.log(finalCorrect / questionsAnswered);
+
+    // if GOOD score
+    if (finalCorrect / questionsAnswered > 0.8) {
+        congratsMessage.innerHTML = "Félicitations!";
+        motivationMessage.innerHTML = "Wow, great score!  Why don't you try a harder level?";
+    
+    // if OK score
+    } else if (finalCorrect / questionsAnswered < 0.8 && finalCorrect / questionsAnswered > 0.4) {
+        congratsMessage.innerHTML = "Great!";
+        motivationMessage.innerHTML = "Well done!  Keep practicing!";
+    }
+    // if BAD score    
+     else {
+        congratsMessage.innerHTML = "Oh dear..";
+        motivationMessage.innerHTML = "There's definitely room for improvment.. feel free to try again or check out our suggested learning resource pages";
+    }
+
+    // remove last screen
+    document.getElementById("game-area-div-id").remove();
+     
+
+    let endGamehomeButton = document.createElement("button");
+    endGamehomeButton.innerHTML = "Return to Homepage";
+    endGamehomeButton.classList.add("all-buttons");
+    endGamehomeButton.id = "end-game-home-button";
+    endGamehomeButton.addEventListener("click", function () {
         endGameDiv.remove();
         introSection();
 
     });
-    endGameDiv.appendChild(homeButton);
+
+    questionsAnswered = 0;
+    endGameDiv.appendChild(endGamehomeButton);
 
 }
-
-
-// // // /**
-// // //  * This function will be called by a button named "Back to Home Screen" or "Reset Game",
-// // //  * will display a warning message about resetting, then reload the introSection function 
-// // //  * and all other answer tallies etc
-// // //  */
-// // // function resetGame() {
-// // //     // call function introSection to restart the game
-
-// // // }
