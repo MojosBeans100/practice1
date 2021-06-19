@@ -40,17 +40,44 @@ function introSection() {
 
     let helloHeader = document.createElement("h1");
     helloHeader.id = "welcome-header";
-    helloHeader.innerHTML = "Welcome to Un Petit Jeu Francais!";
+    helloHeader.innerHTML = "Welcome to <br> <span id='span'>Un Petit Jeu Francais!</span>";
     introSectionDiv.appendChild(helloHeader);
+
+    let gameDescription = document.createElement("h2");
+    gameDescription.id = "game-description";
+    gameDescription.innerHTML = "This website allows you to play a short,<br> fun quiz to practice your level in French!"
+    introSectionDiv.appendChild(gameDescription);
+
+    let quizButton = document.createElement("button");
+    quizButton.id = "quiz-button";
+    quizButton.innerHTML = 'Play quiz <i class="fa-solid fa-arrow-right"></i>';
+    quizButton.classList.add("all-buttons");
+    introSectionDiv.appendChild(quizButton);
+    quizButton.addEventListener("click", inputName);
+
+}
+
+/**
+ * This function brings up an initial screen where the user can input their name 
+ */
+function inputName() {
+
+    let introSectionDiv = document.getElementById("intro-section-div");
+    introSectionDiv.remove();
+
+    let mainDiv = document.getElementById("main-div");
+    let inputNameDiv = document.createElement("div");
+    inputNameDiv.id = "input-name-div";
+    mainDiv.appendChild(inputNameDiv);
 
     let helloIntro = document.createElement("p")
     helloIntro.id = "hello-intro";
     helloIntro.innerHTML = "First let's start with your name:";
-    introSectionDiv.appendChild(helloIntro);
+    inputNameDiv.appendChild(helloIntro);
 
     let introForm = document.createElement("form");
     introForm.id = "intro-form";
-    introSectionDiv.appendChild(introForm);
+    inputNameDiv.appendChild(introForm);
 
     let nameInput = document.createElement("input");
     nameInput.type = "text";
@@ -80,8 +107,8 @@ function introSection() {
 
 
     });
-
 }
+
 
 /**
  * This function changes the first intro screen into the game options screen,
@@ -124,6 +151,18 @@ function chooseGameOptions() {
     difficultyh2.id = "difficulty-h2";
     difficultyh2.innerHTML = (`Please choose a game difficulty`);
     difficultyForm.appendChild(difficultyh2);
+
+    // Info button
+    let infoButton = document.createElement("button");
+    infoButton.id = "info-button";
+    infoButton.innerHTML = "<i class='fas fa-info'></i>";
+    difficultyForm.appendChild(infoButton);
+    infoButton.addEventListener("click", function (event) {
+        event.preventDefault()
+        
+    });
+
+    infoButton.addEventListener("click",infoPopUp);
 
     // Create difficulty radio buttons
     let difficultyRadioOptions = ["Easy", "Medium", "Hard"];
@@ -218,11 +257,11 @@ function chooseGameOptions() {
     let homeButton = document.createElement("button");
     homeButton.id = "home-button";
     homeButton.classList.add("all-buttons");
-    homeButton.innerHTML = "Return to Home";
+    homeButton.innerHTML = "Home <i class='fa-solid fa-house-heart'></i>";
     gameOptionsDiv.appendChild(homeButton);
 
     // Remove the intro screen div
-    document.getElementById("intro-section-div").remove();
+    document.getElementById("input-name-div").remove();
 
     // Link button to return to intro screen
     homeButton.addEventListener("click", function () {
@@ -233,6 +272,32 @@ function chooseGameOptions() {
 
 }
 
+function infoPopUp() {
+
+    alert("YO YO it workds");
+    let mainBody = document.getElementsByTagName("body")[0];
+    let fadeOutDiv = document.createElement("div");
+    fadeOutDiv.classList.add("fade-out-div");
+    mainBody.appendChild(fadeOutDiv);
+
+    let popUpDiv = document.createElement("div");
+    popUpDiv.classList.add("pop-up-div");
+    mainBody.appendChild(popUpDiv);
+
+    let infoText = document.createElement("p");
+
+    let infoPopUpButton = document.createElement("button");
+    infoPopUpButton.id = "info-pop-up-button";
+    infoPopUpButton.classList.add("all-buttons");
+    infoPopUpButton.innerHTML = "Ok, got it";
+    popUpDiv.appendChild(infoPopUpButton);
+    infoPopUpButton.addEventListener("click", function () {
+        fadeOutDiv.remove();
+        popUpDiv.remove();
+    })
+
+}
+
 /**
  * This function changes the first intro screen into the game area with question, 
  * multiple choice, answer tally etc.  It sets up the HTML.  It is called by the "Play"
@@ -240,9 +305,6 @@ function chooseGameOptions() {
  */
 function openGameArea() {
 
-
-    // console.log(gameDifficulty);
-    // console.log(gameLength);
     // Get main div
     let mainDiv = document.getElementById("main-div");
 
@@ -294,7 +356,7 @@ function openGameArea() {
 
     // Create button to return to homepage, goes back to intro screen with name input etc
     let homeButton = document.createElement("button");
-    homeButton.id = "home-button"
+    homeButton.id = "game-home-button"
     homeButton.innerHTML = "Return to Home";
     homeButton.classList.add("all-buttons");
     gameAreaLeft2.appendChild(homeButton);
@@ -304,7 +366,6 @@ function openGameArea() {
         gameAreaDiv.remove();
         introSection();
     });
-
 
     // Create Submit button
     let submitAnswerButton = document.createElement("button");
@@ -386,8 +447,6 @@ function openGameArea() {
     gameAreaRight2.appendChild(incorrectTally);
     gameAreaRight2.appendChild(incorrectTallyLabel);
 
-
-
     generateQuestion();
 
 }
@@ -461,7 +520,7 @@ function generateQuestion() {
     let gameAreaTop = document.getElementById("game-area-top");
     let questionh2 = document.createElement("h2");
     questionh2.id = "question-h2"
-    questionh2.innerHTML = (`What is ${mcAnswer} in ${questionLanguage}?`);
+    questionh2.innerHTML = (`What is &nbsp&nbsp<span id='questionSpan'>${mcAnswer}</span>&nbsp&nbsp in ${questionLanguage}?`);
     gameAreaTop.appendChild(questionh2);
 
     let questionOf = document.createElement("h2");
@@ -658,21 +717,21 @@ function endGame() {
     if (finalCorrect / questionsAnswered > 0.8) {
         congratsMessage.innerHTML = "Félicitations!";
         motivationMessage.innerHTML = "Wow, great score!  Why don't you try a harder level?";
-    
-    // if OK score
+
+        // if OK score
     } else if (finalCorrect / questionsAnswered < 0.8 && finalCorrect / questionsAnswered > 0.4) {
         congratsMessage.innerHTML = "Great!";
         motivationMessage.innerHTML = "Well done!  Keep practicing!";
     }
     // if BAD score    
-     else {
+    else {
         congratsMessage.innerHTML = "Oh dear..";
         motivationMessage.innerHTML = "There's definitely room for improvment.. feel free to try again or check out our suggested learning resource pages";
     }
 
     // remove last screen
     document.getElementById("game-area-div-id").remove();
-     
+
 
     let endGamehomeButton = document.createElement("button");
     endGamehomeButton.innerHTML = "Return to Homepage";
