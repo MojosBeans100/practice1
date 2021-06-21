@@ -50,7 +50,7 @@ function introSection() {
 
     let quizButton = document.createElement("button");
     quizButton.id = "quiz-button";
-    quizButton.innerHTML = 'Play quiz <i class="fa-solid fa-arrow-right"></i>';
+    quizButton.innerHTML = "Play quiz <i class='fa-solid fa-arrow-right'></i>";
     quizButton.classList.add("all-buttons");
     introSectionDiv.appendChild(quizButton);
     quizButton.addEventListener("click", inputName);
@@ -84,7 +84,6 @@ function inputName() {
     nameInput.required = true; /// why does this not work
     nameInput.id = "name-entry";
     introForm.appendChild(nameInput);
-
 
     let firstSubmitButton = document.createElement("button");
     firstSubmitButton.type = "submit";
@@ -146,6 +145,9 @@ function chooseGameOptions() {
     difficultyForm.id = "difficulty-form";
     gameOptionsDiv.appendChild(difficultyForm);
 
+
+
+
     // Game difficulty text
     let difficultyh2 = document.createElement("h2");
     difficultyh2.id = "difficulty-h2";
@@ -156,13 +158,11 @@ function chooseGameOptions() {
     let infoButton = document.createElement("button");
     infoButton.id = "info-button";
     infoButton.innerHTML = "<i class='fas fa-info'></i>";
-    difficultyForm.appendChild(infoButton);
+    difficultyh2.appendChild(infoButton);
     infoButton.addEventListener("click", function (event) {
         event.preventDefault()
-        
     });
-
-    infoButton.addEventListener("click",infoPopUp);
+    infoButton.addEventListener("click", infoPopUp);
 
     // Create difficulty radio buttons
     let difficultyRadioOptions = ["Easy", "Medium", "Hard"];
@@ -274,7 +274,6 @@ function chooseGameOptions() {
 
 function infoPopUp() {
 
-    alert("YO YO it workds");
     let mainBody = document.getElementsByTagName("body")[0];
     let fadeOutDiv = document.createElement("div");
     fadeOutDiv.classList.add("fade-out-div");
@@ -284,7 +283,26 @@ function infoPopUp() {
     popUpDiv.classList.add("pop-up-div");
     mainBody.appendChild(popUpDiv);
 
-    let infoText = document.createElement("p");
+    let infoPopUph1 = document.createElement("h1");
+    infoPopUph1.innerHTML = "Game difficulties"
+    popUpDiv.appendChild(infoPopUph1);
+
+    let infoDifficultyList = document.createElement("ul");
+    popUpDiv.appendChild(infoDifficultyList);
+     
+    let li1 = document.createElement("li");
+    li1.innerHTML = "Easy<br>Common words<br>15 sec time limit<br>4 multiple choice options";
+    infoDifficultyList.appendChild(li1);
+
+    let li2 = document.createElement("li");
+    li2.innerHTML = "Medium<br>More difficult words<br>10 sec time limit<br>5 multiple choice options";
+    infoDifficultyList.appendChild(li2);
+
+    let li3 = document.createElement("li");
+    li3.innerHTML = "Hard<br>Uncommon words<br>5 sec time limit<br>6 multiple choice options";
+    infoDifficultyList.appendChild(li3);
+
+
 
     let infoPopUpButton = document.createElement("button");
     infoPopUpButton.id = "info-pop-up-button";
@@ -386,21 +404,6 @@ function openGameArea() {
     gameAreaLeft2.appendChild(skipQuestionButton);
     skipQuestionButton.addEventListener("click", skipQuestion);
 
-    // // Create progress tally
-    // let questionsAnswered = document.createElement("p");
-    // questionsAnswered.innerHTML = 0;
-    // questionsAnswered.id = "questionsAnsweredTally";
-
-    // let progressTally = document.createElement("p");
-    // progressTally.id = "progress-tally";
-    // progressTally.classList.add("tally-numbers");
-    // progressTally.innerHTML = (`${questionsAnswered.innerText} / ${gameLength}`);
-
-    // let progressTallyLabel = document.createElement("p");
-    // progressTallyLabel.classList.add("tally-labels");
-    // progressTallyLabel.id = "progress-tally-label";
-    // progressTallyLabel.innerHTML = "Progress";
-
     // Create skip tally
     let skipTally = document.createElement("p");
     skipTally.innerHTML = 0;
@@ -451,6 +454,7 @@ function openGameArea() {
 
 }
 
+
 function generateQuestion() {
 
     let numOfQuestions = "";
@@ -475,10 +479,6 @@ function generateQuestion() {
         timeLimit = 5;
     };
 
-
-
-    // console.log(`Num of questions ${numOfQuestions}`);
-
     var i;
     let mcRandNumbers = [];
     let mcRandWords = [];
@@ -494,11 +494,6 @@ function generateQuestion() {
         options[answerLanguage][gameDifficulty].splice(mcRandNumbers[i], 1);
     }
 
-
-    // console.log(`Rand number are: ${mcRandNumbers}`);
-    // console.log(`Mc Rand Words are : ${mcRandWords}`);
-    // console.log(`Mc Answ Words are : ${mcAnsWords}`);
-
     // Pick a value between 1 and 4
     numPositive = numOfQuestions - 1;
     let num0 = Math.floor(Math.random() * numPositive) + 1;
@@ -508,27 +503,22 @@ function generateQuestion() {
     mcAnswer = mcAnsWords[num0];
     mcAnswer.id = "mc-answer";
 
-
-    //     // Index the answer in English
+    // Index the answer in English
     mcQuestion = mcRandWords[num0];
-
-    // console.log(num0);
-    // console.log(`The answer is ${mcAnswer}`);
-    // console.log(`The answer is ${mcQuestion}`);
 
     // Create the question
     let gameAreaTop = document.getElementById("game-area-top");
     let questionh2 = document.createElement("h2");
-    questionh2.id = "question-h2"
-    questionh2.innerHTML = (`What is &nbsp&nbsp<span id='questionSpan'>${mcAnswer}</span>&nbsp&nbsp in ${questionLanguage}?`);
+    questionh2.id = "question-h2";
+    questionh2.innerHTML = (`<span id="question-of">Question ${questionsAnswered + 1} of ${gameLength}</span> <span id="actualQuestion">What is &nbsp&nbsp<span id='questionSpan'>${mcAnswer}</span>&nbsp&nbsp in ${questionLanguage}?</span>`);
     gameAreaTop.appendChild(questionh2);
 
-    let questionOf = document.createElement("h2");
-    questionOf.id = "question-of";
-    questionOf.innerHTML = (`Question ${questionsAnswered + 1} of ${gameLength}`);
+    // let questionOf = document.createElement("h2");
+    // questionOf.id = "question-of";
+    // questionOf.innerHTML = ();
 
-    let gameAreaLeft1 = document.getElementById("game-area-left1");
-    gameAreaLeft1.appendChild(questionOf);
+    // let gameAreaLeft1 = document.getElementById("game-area-left1");
+    // gameAreaLeft1.appendChild(questionOf);
 
     // Create form for multiple choice radio buttons
     let gameAreaLeft = document.getElementById("game-area-left1");
@@ -613,7 +603,7 @@ function checkAnswer() {
             // if radio button picked textContent === answer
             document.getElementsByTagName("h2")[0].remove();
             document.getElementsByTagName("form")[0].remove();
-            document.getElementById("question-of").remove();
+            // document.getElementById("question-of").remove();
 
             if (pickedAnswer === mcQuestion) {
                 newCorrectTally = oldCorrectTally += 1;
@@ -714,12 +704,12 @@ function endGame() {
     console.log(finalCorrect / questionsAnswered);
 
     // if GOOD score
-    if (finalCorrect / questionsAnswered > 0.8) {
+    if (finalCorrect / questionsAnswered >= 0.8) {
         congratsMessage.innerHTML = "Félicitations!";
         motivationMessage.innerHTML = "Wow, great score!  Why don't you try a harder level?";
 
         // if OK score
-    } else if (finalCorrect / questionsAnswered < 0.8 && finalCorrect / questionsAnswered > 0.4) {
+    } else if (finalCorrect / questionsAnswered < 0.8 && finalCorrect / questionsAnswered >= 0.4) {
         congratsMessage.innerHTML = "Great!";
         motivationMessage.innerHTML = "Well done!  Keep practicing!";
     }

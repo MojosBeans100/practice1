@@ -49,9 +49,9 @@ body {
     height: 50%;
     width: 60%;
     border: solid black;
-    background-color: red;
+    background-color: white;
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 20%;
     z-index: 9;
     
@@ -63,10 +63,12 @@ body {
 	text-decoration: none;
 	background: #60a3bc;
 	padding: 20px;
-	border-radius: 50px; 
+	border-radius: 10px; 
     width: 300px;
     height: 80px;
-    font-size: 15px;
+    font-size: 22px;
+    vertical-align: center;
+    padding: 0;
 }
 
 .all-buttons:hover {
@@ -195,7 +197,7 @@ body {
 
 #home-button, #play-game-button {
     margin-top: 100px;
-    font-size: 20px;
+    font-size: 25px; 
 } 
 
 #home-button {
@@ -212,40 +214,44 @@ body {
 #game-area-top {
     height: 15%;
     width: 100%;
-    /* border: solid pink; */
-    text-align: center;
-    font-size: 30px;
-    
+    border: solid pink;
+    /* text-align: center; */
+    font-size: 1.2vw;
 }
 
 #questionSpan {
-    /* color: purple; */
+    /* color: purple;  */
     letter-spacing: 3px;
     text-decoration: underline;
-    font-size: 50px;
+    font-size: 2vw;
+    text-align: center;
 }
 
 #question-of {
-    font-size: 20px;
+    font-size: 25px;
+    margin-left: 30px;
 }
+
+#actualQuestion {
+        margin-left: 80px;
+    }
 
 #game-area-left {
     height: 85%;
     width: 75%;
     float: left;
-    /* border: solid blue; */
+    border: solid blue; 
 }
 
 #game-area-left1 {
-    height: 80%;
-    
+    height: 80%;  
 }
 
 #game-area-left2 {
     height: 20%;
     width: 90%;
     margin: auto;
-    /* border: solid orange; */
+    border: solid orange; 
     display: flex;
     justify-content: space-between;
 }
@@ -263,22 +269,27 @@ body {
     
 }
 
-
 .multiple-choice-labels {
     font-size: 32px;
     margin-right: 30%;
 }
 
- #next-question-button {
+#next-question-button {
     font-weight: bold;
+    margin-top: 20px;
 } 
 
+#game-home-button, #skip-question-button {
+    width: 250px;
+    height:60px;
+    margin-top:30px;
+}
 
 #game-area-right {
     height: 80%;
     width: 20%;
     float: right;
-    font-size: 30px;
+    font-size: 40px;
     display: flex;
     flex-direction: column;
     /* border: solid pink; */
@@ -294,12 +305,13 @@ body {
 .tally-labels {
     position: relative;
     top: 2%;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .tally-numbers {
     position: relative;
     top: 5%;
+
 }
 
 #correctTally {
@@ -331,3 +343,452 @@ body {
     bottom: 10px;
     width: 180px;
 }
+
+/*    1680     */
+
+
+@media only screen and (max-width: 1680px) {
+    
+    /* FRONT PAGE 1680   */
+    #welcome-header {
+        font-size: 60px;
+    }
+    
+    #span {
+        font-size: 80px;
+    }
+    
+    #game-description{
+        font-size: 25px;
+    }
+    
+    /*     NAME INPUT   1680   */
+
+    #intro-form{
+        width: 80%;
+        height: 60%;
+    }
+    
+    /* #name-entry {
+        width: 80%;
+        height: 50px;
+        font-size: 30px;
+        text-align: center;
+        margin-left: 10%;
+        margin-top: 10%;
+    }
+     */
+    /* #name-button {
+       margin-top: 20%;
+       margin-left: calc(50% - 150px);
+    }  */
+
+    
+
+    /*     GAME OPTIONS   1680  */
+
+    #welcome-message {
+        font-size: 50px;
+        margin-top: 10px;
+    }
+    
+    #choose-game-options-text {
+        font-size: 30px;
+        margin-top: 10px;
+    }
+    
+    /* #info-button {
+        border: white;
+        background-color: white;
+
+    } */
+    
+    /* #info-button:hover {
+        color: red;
+    } */
+    
+    /* #difficulty-form {
+        border: solid red;
+    } */
+    
+    #difficulty-h2, #game-length-h2 {
+        font-size: 25px;
+        margin-top: 30px;
+    }
+    
+    #game-length-form {
+        /* border: solid yellow; */
+    }
+    
+    .game-difficulty-radio-buttons, .game-length-radio-buttons {
+        width: 15px;
+        height: 15px;   
+    }
+    
+    .game-difficulty-radio-labels, .game-length-radio-labels {
+        font-size: 25px;
+        margin-left: 20px;
+        margin-right: 50px;
+    }
+    
+    #home-button, #play-game-button {
+        margin-top: 50px;
+        font-size: 15px;
+    } 
+/*     
+    #home-button {
+        margin-left: 120px;
+    } */
+
+
+    /*     INFO POP UP  1680  */
+    /*     PLAY GAME   1680   */
+
+    /* #game-area-div-id {
+        height: 100%;
+        width: 100%;
+    } */
+    
+    /* #game-area-top {
+        /* height: 15%;
+        width: 100%;
+        border: solid pink; */
+        /* text-align: center; 
+        font-size: 20px;
+    } */
+    
+    /* #questionSpan {
+        
+        font-size: 40px;
+    }
+    
+    #question-of {
+        font-size: 20px;
+        margin-left: 10px;
+    } 
+    
+    /* #game-area-left {
+        height: 85%;
+        width: 75%;
+        float: left;
+        border: solid blue; 
+    } */
+    
+    /* #game-area-left1 {
+        height: 80%;   
+    }
+     */
+    /* #game-area-left2 {
+        height: 20%;
+        width: 90%;
+        margin: auto;
+        border: solid orange; 
+        display: flex;
+        justify-content: space-between;
+    } */
+    
+    .multiple-choice-radios {
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-top: 4%;
+    
+        width: 20px;
+        height: 20px;
+        /* cursor: pointer; */
+        /* border-radius: 50%;
+        border: 2px solid #FFFFFF;  */
+    }
+
+    #next-question-button {
+        margin-top: 0;
+        width: 200px;
+        font-size: 20px;
+    } 
+    
+    #game-home-button, #skip-question-button {
+        width: 200px;
+        height:60px;
+        margin-top:10px;
+        font-size: 15px;
+    }
+    
+    
+    .multiple-choice-labels {
+        font-size: 25px;
+        margin-right: 30%;
+    }
+    
+     /* #next-question-button {
+        font-weight: bold;
+    } 
+     */
+    
+    #game-area-right {
+        /* height: 80%;
+        width: 20%;
+        float: right; */
+        font-size: 30px;
+        /* display: flex;
+        flex-direction: column;
+        /* border: solid pink; */
+        /* text-align: center; */ 
+    }
+    
+    /* .game-area-right-divs {
+      
+        height: 33%;
+        border: solid blue;
+    }    */   
+     
+    .tally-labels {
+        /* position: relative; */
+        top: 0;
+        font-size: 25px;
+    }
+    
+   
+    
+    
+
+    /*     END GAME       */
+    
+}
+
+
+
+
+/*     FRONT PAGE     */
+/*     NAME INPUT     */
+/*     GAME OPTIONS   */
+/*     INFO POP UP    */
+/*     PLAY GAME      */
+/*     END GAME       */
+
+/*   1500     */
+
+@media only screen and (max-width: 1500px) {
+
+    /*      COMMON  1500       */
+
+    .all-buttons {
+        font-size: 18px;
+        width: 200px;
+        height: 50px;
+        text-align: center;
+    }
+
+    /*     FRONT PAGE  1500     */
+
+    #welcome-header {
+        font-size: 60px;
+    }
+
+    #span {
+        font-size: 70px;
+    }
+
+    #quiz-button{
+        margin-top: 50px;
+        
+    }
+
+    /*     NAME INPUT     */
+
+    #name-button {
+       margin-left: calc(50% - 100px);
+    } 
+
+    /*     PLAY GAME      */
+     /* #game-area-top {
+        font-size: 25px;
+    } */
+
+    /* #question-h2 {
+        padding: 0;
+    }
+    
+    #questionSpan {}
+        font-size: 30px;
+    } 
+    
+    #question-of {
+        font-size: 25px;
+    } */
+
+    #next-question-button {
+        margin-top: 0;
+        width:180px;
+        height:50px;
+        font-size: 15px;
+        /* padding: 0; */
+    } 
+    
+    #game-home-button, #skip-question-button {
+        width: 150px;
+        height:40px;
+        margin-top:10px;
+        font-size: 12px;
+        /* padding: 0; */
+    }
+
+}    
+
+
+/*     1300         */
+
+@media only screen and (max-width: 1300px) {
+
+/*     FRONT PAGE     */
+/*     NAME INPUT     */
+
+/*     GAME OPTIONS  1300   */
+    /* .game-difficulty-radio-buttons, .game-length-radio-buttons {
+        width: 15px;
+        height: 15px;   
+    } */
+
+    #difficulty-h2, #game-length-h2 {
+        font-size: 18px;
+        /* margin-top: 50px; */
+    }
+
+    .game-difficulty-radio-labels, .game-length-radio-labels {
+        font-size: 18px;
+        margin-left: 10px;
+        margin-right: 30px;
+    }
+
+    #home-button {
+        margin-left: 50px;
+    }
+
+
+/*     INFO POP UP    */
+/*     PLAY GAME      */
+
+/* #game-area-top {
+        font-size: 25px;
+    } */
+     
+    /* #actualQuestion {
+        font-size: 15px;
+    }
+    /* #questionSpan {
+        font-size: 15px;
+    }  */
+    
+    #question-of {
+        font-size: 15px;
+    } */
+/*     END GAME       */
+}
+
+
+/*    1000      */
+@media only screen and (max-width: 1000px) {
+
+    #home-button {
+        margin-left: 30px;
+    }
+    
+}
+
+
+@media only screen and (max-width: 900px) {
+
+/*       COMMON            */
+/*     FRONT PAGE  900   */
+
+    /* #welcome-header {
+        font-size: 60px;
+    }
+
+    #span {
+        font-size: 70px;
+    } */
+
+    /* #quiz-button{
+        margin-top: 50px;
+        
+    } */
+
+    /*     NAME INPUT  900   */
+
+    #hello-intro {
+        font-size: 30px;
+    }
+    
+/*     GAME OPTIONS   */
+
+    #home-button, #play-game-button {
+        /* margin-left: 50px; */
+        width: 150px;
+    }
+
+/*     INFO POP UP    */
+/*     PLAY GAME      */
+/*     END GAME       */
+
+
+}
+
+
+@media only screen and (max-width: 720px) {
+
+    /*     FRONT PAGE  720   */
+    
+        #welcome-header {
+            font-size: 50px;
+        }
+    
+        #span {
+            font-size: 60px;
+        }
+    
+        /* #game-description{
+            font-size: 20px;
+        }
+     */
+        /* #quiz-button{
+            margin-top: 50px;
+            
+        } */
+    
+    /*     NAME INPUT     */
+    /*     GAME OPTIONS   */
+    /*     INFO POP UP    */
+    /*     PLAY GAME      */
+    /*     END GAME       */
+    
+    
+    }
+
+    @media only screen and (max-width: 620px) {
+
+        /*     FRONT PAGE  620   */
+        
+            #welcome-header {
+                font-size: 40px;
+            }
+        
+            #span {
+                font-size: 50px;
+            }
+        
+            /* #game-description{
+                font-size: 20px;
+            }
+         */
+            /* #quiz-button{
+                margin-top: 50px;
+                
+            } */
+        
+        /*     NAME INPUT     */
+        /*     GAME OPTIONS   */
+        /*     INFO POP UP    */
+        /*     PLAY GAME      */
+        /*     END GAME       */
+        
+        
+        }
