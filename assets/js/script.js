@@ -658,7 +658,7 @@ function skipQuestion() {
 
     document.getElementsByTagName("h2")[0].remove();
     document.getElementsByTagName("form")[0].remove();
-    document.getElementById("question-of").remove();
+    // document.getElementById("question-of").remove();
 
     generateQuestion();
 

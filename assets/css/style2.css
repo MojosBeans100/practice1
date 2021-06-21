@@ -214,7 +214,7 @@ body {
 #game-area-top {
     height: 15%;
     width: 100%;
-    border: solid pink;
+    /* border: solid pink; */
     /* text-align: center; */
     font-size: 1.2vw;
 }
@@ -240,7 +240,7 @@ body {
     height: 85%;
     width: 75%;
     float: left;
-    border: solid blue; 
+    /* border: solid blue;  */
 }
 
 #game-area-left1 {
@@ -251,7 +251,7 @@ body {
     height: 20%;
     width: 90%;
     margin: auto;
-    border: solid orange; 
+    /* border: solid orange;  */
     display: flex;
     justify-content: space-between;
 }
