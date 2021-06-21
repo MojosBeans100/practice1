@@ -322,6 +322,21 @@ body {
     color: red;
 }
 
+/*       DISPLAY ANSWERS         */
+
+.correct-words{
+    color: green;
+}
+
+.incorrect-words{
+    color: red;
+    text-decoration: line-through;
+}
+
+.white-text {
+    color: white;
+}
+
 /*   END GAME DIV        */
  
 #end-game-div {
@@ -343,6 +358,9 @@ body {
     bottom: 10px;
     width: 180px;
 }
+
+
+
 
 /*    1680     */
 

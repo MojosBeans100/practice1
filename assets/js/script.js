@@ -4,6 +4,9 @@ let mcQuestion;
 let questionsAnswered = 0;
 let numOfQuestions = 0;
 let downloadTimer;
+let userAnswers = [];
+let trueAnswers = [];
+let trueQuestions = [];
 
 
 // Define language arrays
@@ -50,7 +53,7 @@ function introSection() {
 
     let quizButton = document.createElement("button");
     quizButton.id = "quiz-button";
-    quizButton.innerHTML = "Play quiz <i class='fa-solid fa-arrow-right'></i>";
+    quizButton.innerHTML = "Play quiz <i class='fa fa-solid fa-arrow-right'></i>";
     quizButton.classList.add("all-buttons");
     introSectionDiv.appendChild(quizButton);
     quizButton.addEventListener("click", inputName);
@@ -289,7 +292,7 @@ function infoPopUp() {
 
     let infoDifficultyList = document.createElement("ul");
     popUpDiv.appendChild(infoDifficultyList);
-     
+
     let li1 = document.createElement("li");
     li1.innerHTML = "Easy<br>Common words<br>15 sec time limit<br>4 multiple choice options";
     infoDifficultyList.appendChild(li1);
@@ -503,8 +506,14 @@ function generateQuestion() {
     mcAnswer = mcAnsWords[num0];
     mcAnswer.id = "mc-answer";
 
+    trueAnswers.push(mcAnswer);
+
+    console.log(trueAnswers);
+
     // Index the answer in English
     mcQuestion = mcRandWords[num0];
+    trueQuestions.push(mcQuestion);
+
 
     // Create the question
     let gameAreaTop = document.getElementById("game-area-top");
@@ -540,6 +549,8 @@ function generateQuestion() {
         multipleChoiceForm.appendChild(radio1);
         multipleChoiceForm.appendChild(label1);
     }
+
+
 
     // console.log(multipleChoiceForm[3]);
     // console.log(multipleChoiceForm.length);
@@ -578,8 +589,6 @@ function generateQuestion() {
  */
 function checkAnswer() {
 
-
-
     let nums = document.getElementById("answer-multiple-choice").length;
     let nums1 = nums - 1;
 
@@ -592,13 +601,12 @@ function checkAnswer() {
     let pickedAnswer = "";
     let checkedRadios = [];
 
-
-
     //check status of radio buttons, if one is checked, output answer
     for (i = 0; i < nums; i++) {
         if (document.getElementsByTagName("input")[i].checked) {
 
             pickedAnswer = document.getElementsByTagName("label")[i].innerText;
+
             console.log(`Picked answer is ${pickedAnswer}`);
             // if radio button picked textContent === answer
             document.getElementsByTagName("h2")[0].remove();
@@ -630,21 +638,67 @@ function checkAnswer() {
     }
 
 
+    userAnswers.push(pickedAnswer);
 
+    console.log(userAnswers);
 
     console.log(`Picked answer is ${pickedAnswer}`);
-
-
     console.log(`Questions answers = ${questionsAnswered}`);
 
-
-
     if (questionsAnswered === gameLength) {
-        endGame();
+        showAnswers();
     }
 
 }
 
+
+function showAnswers() {
+
+    let mainDiv = document.getElementById("main-div");
+
+
+    let showAnswersTitle = document.createElement("h1");
+    showAnswersTitle.id = "show-answers-title";
+    showAnswersTitle.innerHTML = "Here's how you did:";
+
+    let answersList = document.createElement("ul");
+    mainDiv.appendChild(showAnswersTitle);
+    mainDiv.appendChild(answersList);
+
+    let userAnswersList = document.createElement("ul");
+    mainDiv.appendChild(userAnswersList);
+
+    let trueAnswersList = document.createElement("ul");
+    
+    mainDiv.appendChild(trueAnswersList);
+
+    for (i = 0; i < gameLength; i++) {
+        let answeri = document.createElement("li");
+        answeri.innerHTML = (`${trueAnswers[i]}`);
+        answersList.appendChild(answeri);
+
+        let answerj = document.createElement("li");
+        answerj.innerHTML = (`${userAnswers[i]}`);
+        userAnswersList.appendChild(answerj);
+
+        let answerk = document.createElement("li");
+        answerk.classList.add("white-text");
+        answerk.innerHTML = (`${trueQuestions[i]} <i class="fas fa-check"></i>`);
+        
+        trueAnswersList.appendChild(answerk);
+
+        if (trueQuestions[i] === userAnswers[i]) {
+            answerj.classList.add("correct-words");
+        } else {
+            answerj.classList.add("incorrect-words");
+            answerk.classList.remove("white-text");
+            answerk.classList.add("correct-words");
+        }
+    }
+
+    document.getElementById("game-area-div-id").remove();
+
+}
 
 // /**
 //  * This functions is called by the Skip Question button on the game area page
